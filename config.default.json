@@ -1,0 +1,15 @@
+{
+    "logLevel": "error",
+    
+    "awsAccessKeyId": "YOUR_ACCESS_KEY_ID",
+    "awsSecretAccessKey": "YOUR_SECRET_KEY",
+    "awsRegion": "us-east-1",
+
+    "queueUrl": "YOUR_QUEUE_URL",
+    "queueWaitTimeSeconds": 20,
+
+    "degreeOfParallelism": 1,
+
+    "babyConnectEmail": "YOUR_BABY_CONNECT_EMAIL",
+    "babyConnectPassword": "YOUR_BABY_CONNECT_PASSWORD"
+}

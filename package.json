@@ -1,0 +1,18 @@
+{
+  "name": "baby-connect-sqs-listener",
+  "version": "0.9.0",
+  "description": "A nodejs server application that polls an AWS SQS queue for messages describing Baby Connect events to be recorded.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Platt",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.0.1",
+    "aws-sdk": "^2.5.3",
+    "baby-connect": "git+https://github.com/platta/baby-connect.git",
+    "nconf": "^0.8.4",
+    "winston": "^2.2.0"
+  }
+}
