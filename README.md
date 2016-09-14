@@ -34,6 +34,15 @@ cd baby-connect-sqs-listener
 npm install
 ```
 
+The application requires an available display for when it uses browser
+automation. It can be run in a console window inside of an X Windows
+session, or alongside Xvfb, a package that can be used to create a virtual
+framebuffer.
+
+```bashp
+sudo apt-get install Xvfb
+```
+
 ## Configuration
 
 The config.default.json file shows all available configuration options. The ones
@@ -54,6 +63,32 @@ Key must have the following permissions on the SQS queue:
 
 ## Usage
 
+If you are running inside of X Windows, you can simply launch the application.
+
 ```bashp
 node index
 ```
+
+To use with Xvfb, you must first launch Xvfb to create a framebuffer, and when
+you launch the application you must tell it which display to use via the DISPLAY
+environment variable.
+
+```bashp
+Xvfb -ac -screen scrn 1280x1024x24 :9.0 &
+DISPLAY=:9.0 node index
+```
+
+## Daemon
+
+Included in the `daemon` folder is a shell script with instructions that you can
+use to set up baby-connect-sqs-listener as a service on your Raspberry Pi.
+
+__NOTE__ This doesn't work yet! 
+
+## CloudFormation Template
+
+In the `CloudFormation` folder there is a JSON file containing a CloudFormation
+template that can be used to stand up the necessary resources in AWS for running
+a Baby Connect SQS queue. The template will also create an IAM User and an
+Access Key for that user, to be used by the baby-connect-sqs-listener
+application.

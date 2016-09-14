@@ -1,0 +1,287 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "AWS::CloudFormation::Designer": {
+      "5d987d32-8005-4621-aee0-b02c859cb926": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -120,
+          "y": 200
+        },
+        "z": 0,
+        "embeds": []
+      },
+      "cb0c9f50-538b-43e9-914a-41f063161c2b": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 160,
+          "y": 160
+        },
+        "z": 0,
+        "embeds": []
+      },
+      "a9c3a546-bf28-46a3-b96a-4d8f606e7657": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 280,
+          "y": 160
+        },
+        "z": 0,
+        "embeds": [],
+        "isassociatedwith": [
+          "cb0c9f50-538b-43e9-914a-41f063161c2b"
+        ]
+      },
+      "6fe5bf35-1e59-4fee-af74-864181614ab5": {
+        "source": {
+          "id": "a9c3a546-bf28-46a3-b96a-4d8f606e7657"
+        },
+        "target": {
+          "id": "cb0c9f50-538b-43e9-914a-41f063161c2b"
+        },
+        "z": 1
+      },
+      "327f5ec6-f1bf-4c43-a06d-6299cb30c6e5": {
+        "source": {
+          "id": "0e0de30b-ef51-4be3-8cf4-7e6992ed67e2"
+        },
+        "target": {
+          "id": "cb0c9f50-538b-43e9-914a-41f063161c2b"
+        },
+        "z": 11
+      },
+      "7fb667d4-3a72-47a6-ab63-d9a2cdb2e764": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 410,
+          "y": 160
+        },
+        "z": 0,
+        "embeds": [],
+        "isrelatedto": [
+          "a9c3a546-bf28-46a3-b96a-4d8f606e7657"
+        ]
+      },
+      "722ee2da-c404-4513-9266-3defd92b1548": {
+        "source": {
+          "id": "b66bc1e4-7b0b-444b-a4da-88eadace1225"
+        },
+        "target": {
+          "id": "1f162293-0f28-4ccf-85ae-9caea454977d"
+        },
+        "z": 11
+      },
+      "ac6e7bf5-3104-4fc9-993c-dffad8a5fb67": {
+        "source": {
+          "id": "b66bc1e4-7b0b-444b-a4da-88eadace1225"
+        },
+        "target": {
+          "id": "c16f0552-4376-4441-aedc-addbfba8abe9"
+        },
+        "z": 11
+      },
+      "e546bd15-22d8-4fad-85b7-5c8f3941d219": {
+        "source": {
+          "id": "b66bc1e4-7b0b-444b-a4da-88eadace1225"
+        },
+        "target": {
+          "id": "0df79d62-fb03-4bc6-bce0-2e1cb6c43f29"
+        },
+        "z": 11
+      },
+      "7e8df807-93f8-4f5d-90cc-3880c96b0887": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 30,
+          "y": 160
+        },
+        "z": 0,
+        "embeds": [],
+        "isassociatedwith": [
+          "cb0c9f50-538b-43e9-914a-41f063161c2b"
+        ],
+        "isrelatedto": [
+          "5d987d32-8005-4621-aee0-b02c859cb926"
+        ]
+      },
+      "8786f20a-eb87-46dc-a9af-3c3778e9431f": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": 30,
+          "y": 240
+        },
+        "z": 0,
+        "embeds": [],
+        "isrelatedto": [
+          "5d987d32-8005-4621-aee0-b02c859cb926"
+        ]
+      }
+    }
+  },
+  "Resources": {
+    "BabyConnectSQSListenerAccessKey": {
+      "Type": "AWS::IAM::AccessKey",
+      "Properties": {
+        "UserName": {
+          "Ref": "BabyConnectSQSListenerUser"
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "7fb667d4-3a72-47a6-ab63-d9a2cdb2e764"
+        }
+      }
+    },
+    "BabyConnectSQSListenerUser": {
+      "Type": "AWS::IAM::User",
+      "Properties": {
+        "UserName": {
+          "Ref": "UserNameParameter"
+        },
+        "Groups": [
+          {
+            "Ref": "BabyConnectSQSReadersGroup"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "a9c3a546-bf28-46a3-b96a-4d8f606e7657"
+        }
+      }
+    },
+    "BabyConnectSQSQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {
+          "Ref": "QueueNameParameter"
+        },
+        "VisibilityTimeout": 120
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "5d987d32-8005-4621-aee0-b02c859cb926"
+        }
+      }
+    },
+    "BabyConnectSQSReadersGroup": {
+      "Type": "AWS::IAM::Group",
+      "Properties": {
+        "GroupName": {
+          "Ref": "ReaderGroupNameParameter"
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "cb0c9f50-538b-43e9-914a-41f063161c2b"
+        }
+      }
+    },
+    "BabyConnectSQSReader": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "Groups": [
+          {
+            "Ref": "BabyConnectSQSReadersGroup"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage"
+              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BabyConnectSQSQueue",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "7e8df807-93f8-4f5d-90cc-3880c96b0887"
+        }
+      }
+    },
+    "BabyConnectSQSWriter": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:SendMessage"
+              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BabyConnectSQSQueue",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "8786f20a-eb87-46dc-a9af-3c3778e9431f"
+        }
+      }
+    }
+  },
+  "Parameters": {
+    "QueueNameParameter": {
+      "Type": "String",
+      "Default": "BabyConnectQueue",
+      "Description": "Specify a name for the SQS Queue."
+    },
+    "ReaderGroupNameParameter": {
+      "Type": "String",
+      "Default": "BabyConnectSQSReaders",
+      "Description": "Specify a name for the queue reader IAM Group."
+    },
+    "UserNameParameter": {
+      "Type": "String",
+      "Default": "BabyConnectSQSListener",
+      "Description": "Specify a name for the queue listener IAM User."
+    }
+  },
+  "Outputs": {
+    "ListenerUserSecretAccessKey": {
+      "Description": "The Secret Access Key value for the Access Key created so the listener user can access AWS Services. IMPORTANT: This value will never be available again.",
+      "Value": {
+        "Fn::GetAtt": [
+          "BabyConnectSQSListenerAccessKey",
+          "SecretAccessKey"
+        ]
+      }
+    }
+  }
+}
