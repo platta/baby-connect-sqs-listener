@@ -1,5 +1,7 @@
 {
     "logLevel": "error",
+
+    "skipAwsCredentials": false,
     
     "awsAccessKeyId": "YOUR_ACCESS_KEY_ID",
     "awsSecretAccessKey": "YOUR_SECRET_KEY",

@@ -26,13 +26,15 @@ winston.debug('Configured logging level.');
 
 
 // Apply AWS SDK configuration.
-winston.debug('Updating AWS configuration.');
-AWS.config.update({
-    accessKeyId: nconf.get('awsAccessKeyId'),
-    secretAccessKey: nconf.get('awsSecretAccessKey'),
-    region: nconf.get('awsRegion')
-});
-winston.debug('Updated AWS configuration.');
+if (!nconf.get('skipAwsCredentials')) {
+    winston.debug('Updating AWS configuration.');
+    AWS.config.update({
+        accessKeyId: nconf.get('awsAccessKeyId'),
+        secretAccessKey: nconf.get('awsSecretAccessKey'),
+        region: nconf.get('awsRegion')
+    });
+    winston.debug('Updated AWS configuration.');
+}
 
 
 // Create an instance of SQS SDK.
@@ -43,7 +45,7 @@ winston.debug('Created SQS instance.');
 
 // Create processing queue for received messages.
 winston.debug('Creating processing queue.');
-receivedQueue = async.queue(queueCallback, nconf.get('degreeOfParallelism'));
+var receivedQueue = async.queue(queueCallback, nconf.get('degreeOfParallelism'));
 winston.debug('Created processing queue.');
 
 
