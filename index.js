@@ -127,6 +127,7 @@ function queueCallback(item, callback) {
     } catch (error) {
         winston.error('Invalid message body:\n%s', item.Body);
         callback(error);
+        return;
     }
 
     switch (payload.type) {
