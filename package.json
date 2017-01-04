@@ -1,6 +1,6 @@
 {
   "name": "baby-connect-sqs-listener",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "A nodejs server application that polls an AWS SQS queue for messages describing Baby Connect events to be recorded.",
   "main": "index.js",
   "scripts": {

@@ -26,15 +26,19 @@ winston.debug('Configured logging level.');
 
 
 // Apply AWS SDK configuration.
+winston.debug('Updating AWS configuration.');
 if (!nconf.get('skipAwsCredentials')) {
-    winston.debug('Updating AWS configuration.');
     AWS.config.update({
         accessKeyId: nconf.get('awsAccessKeyId'),
         secretAccessKey: nconf.get('awsSecretAccessKey'),
         region: nconf.get('awsRegion')
     });
-    winston.debug('Updated AWS configuration.');
+} else {
+    AWS.config.update({
+        region: nconf.get('awsRegion')
+    });
 }
+winston.debug('Updated AWS configuration.');
 
 
 // Create an instance of SQS SDK.
