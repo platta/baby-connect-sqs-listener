@@ -10,6 +10,8 @@
     "queueUrl": "YOUR_QUEUE_URL",
     "queueWaitTimeSeconds": 20,
 
+    "initializationRetries": 10,
+
     "degreeOfParallelism": 1,
 
     "babyConnectEmail": "YOUR_BABY_CONNECT_EMAIL",

@@ -16,7 +16,8 @@ nconf
     .defaults({
         logLevel: 'error',
         queueWaitTimeSeconds: 20,
-        degreeOfParallelism: 1
+        degreeOfParallelism: 1,
+        initializationRetries: 10
     });
 
 
@@ -66,10 +67,24 @@ winston.debug(JSON.stringify(receiveMessageParameters));
 
 // Initialize baby-connect and start the main loop.
 winston.debug('Initializing baby-connect module.');
-babyConnect.initialize(nconf.get('babyConnectEmail'), nconf.get('babyConnectPassword'), function(error) {
+var retries = nconf.get('initializationRetries');
+babyConnect.initialize(nconf.get('babyConnectEmail'), nconf.get('babyConnectPassword'), initializeCallback);
+
+/**
+ * Callback function for the BabyConnect initialize call.
+ * 
+ * @param error
+ *  An error, if one occurred, otherwise null.
+ */
+function initializeCallback(error) {
     if (error) {
         winston.error(error);
-        winston.info('Failed to initialize, exiting.');
+        if (retries-- > 0) {
+            winston.info('Failed to initialize, trying again.');
+            babyConnect.initialize(nconf.get('babyConnectEmail'), nconf.get('babyConnectPassword'), initializeCallback);
+        } else {
+            winston.info('Failed to initialize, exiting.');
+        }
     } else {
 
         // Start the chain reaction by calling receiveMessage
@@ -79,7 +94,7 @@ babyConnect.initialize(nconf.get('babyConnectEmail'), nconf.get('babyConnectPass
 
         winston.info('Initialization complete.');
     }
-});
+}
 
 /**
  * Callback function that gets called every time the receiveMessage function
